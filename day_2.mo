@@ -107,4 +107,9 @@ actor {
       case _ return null;
     };
   };
+
+  // Challenge 15
+  public func squared_array(array : [Nat]) : async [Nat] {
+    return Array.map<Nat,Nat>(array, func(x : Nat) : Nat { x * x });
+  }
 }
