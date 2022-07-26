@@ -21,8 +21,8 @@ actor {
 
   // Challenge 3
   public func decimals_to_bits(n : Nat) : async Text {
-    var bits = "";
-    var i = n;
+    var bits : Text = "";
+    var i : Nat = n;
     while (i > 0) {
       if (i % 2 == 1) {
         bits := "1" # bits;
@@ -54,7 +54,7 @@ actor {
 
   // Challenge 6
   public func is_inside(t : Text, c : Char) : async Bool {
-    return Text.contains(t, #text c);
+    return Text.contains(t, #char(c));
   };
 
   // Challenge 7
@@ -85,7 +85,7 @@ actor {
     for (i in Iter.range(0, size - 1)) {
       for (j in Iter.range(0, size - 1 - i - 1)) {
         if (sorted[j] > sorted[j + 1]) {
-          let tmp = sorted[j];
+          let tmp : Nat = sorted[j];
           sorted[j] := sorted[j + 1];
           sorted[j + 1] := tmp;
         }
@@ -128,13 +128,13 @@ actor {
 
   // Challenge 14
   public func sum_of_array(array : [Nat]) : async Nat {
-    return Array.foldLeft<Nat, Nat>(array, 0 : Nat, func(x : Nat, y : Nat) : Nat { x + y });
+    return Array.foldLeft<Nat, Nat>(array, 0, func(x : Nat, y : Nat) : Nat { x + y });
   };
 
   // Challenge 15
   public func squared_array(array : [Nat]) : async [Nat] {
     return Array.map<Nat, Nat>(array, func(x : Nat) : Nat { x * x });
-  }
+  };
 
   // Challenge 16
   public func increase_by_index(array : [Nat]) : async [Nat] {
