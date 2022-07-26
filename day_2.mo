@@ -108,6 +108,16 @@ actor {
     };
   };
 
+  // Challenge 13
+  public func populate_array(array : [?Nat]) : async [Nat] {
+      return Array.map<?Nat,Nat>(array, func(n : ?Nat) : Nat {
+          switch n {
+              case null return 0;
+              case (?n) return n;
+          };
+      });
+  };
+
   // Challenge 15
   public func squared_array(array : [Nat]) : async [Nat] {
     return Array.map<Nat,Nat>(array, func(x : Nat) : Nat { x * x });
