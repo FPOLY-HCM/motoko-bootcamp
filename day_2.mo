@@ -1,4 +1,5 @@
 import Array "mo:base/Array";
+import Char "mo:base/Char";
 import Iter "mo:base/Iter";
 import Nat "mo:base/Nat";
 import Nat8 "mo:base/Nat8";
@@ -31,6 +32,24 @@ actor {
       i := i / 2;
     };
     return bits;
+  };
+
+  // Challenge 4
+  public func capitalize_character(c : Char) : async Char {
+    if (Char.isLowercase(c)) {
+      return Char.fromNat32(Char.toNat32(c) - 32);
+    };
+    return c;
+  };
+
+  // Challenge 5
+  public func capitalize_text(t : Text) : async Text {
+    var text : Text = "";
+    for (character in t.chars()) {
+      let capitalize : Char = await capitalize_character(character);
+      text := text # Char.toText(capitalize);
+    };
+    return text;
   };
 
   // Challenge 6
