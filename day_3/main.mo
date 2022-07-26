@@ -1,5 +1,8 @@
+import Cycles "mo:base/ExperimentalCycles";
+import HashMap "mo:base/HashMap";
 import List "mo:base/List";
 import Principal "mo:base/Principal";
+import Text "mo:base/Text";
 
 import Animal "animal";
 import Person "custom";
@@ -45,6 +48,37 @@ actor {
 
   // Challenge 11
   public shared({caller}) func is_anonymous() : async Bool {
-    return Principal.toText(caller) == "2vxsx-fae";
+    return Principal.isAnonymous(caller);
+  };
+
+  // Challenge 12
+  let favoriteNumber = HashMap.HashMap<Principal, Nat>(0, Principal.equal, Principal.hash);
+
+  // Challenge 13 + 14
+  public shared({caller}) func add_favorite_number(n : Nat) : async Text {
+    if (favoriteNumber.get(caller) == null) {
+      favoriteNumber.put(caller, n);
+      return "You've successfully registered your number";
+    };
+    return "You've already registered your number"
+  };
+
+  public shared({caller}) func show_favorite_number() : async ?Nat {
+    return favoriteNumber.get(caller);
+  };
+
+  // Challenge 15
+  public shared({caller}) func update_favorite_number(n : Nat) : async ?Nat {
+    return favoriteNumber.replace(caller, n);
+  };
+
+  public shared({caller}) func delete_favorite_number() : async ?Nat {
+    return favoriteNumber.remove(caller);
+  };
+
+  // Challenge 16
+  public func deposit_cycles() : async Nat {
+    let amount : Nat = Cycles.available();
+    return Cycles.accept(amount);
   };
 }
