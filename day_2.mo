@@ -94,6 +94,14 @@ actor {
     return Array.freeze<Nat>(sorted);
   };
 
+  // Challenge 11
+  public func nat_opt_to_nat(n : ?Nat, m : Nat) : async Nat {
+    switch n {
+      case null return m;
+      case (?n) return n;
+    };
+  };
+
   // Challenge 12
   public func day_of_the_week(n : Nat) : async ?Text {
     switch n {
@@ -110,7 +118,7 @@ actor {
 
   // Challenge 13
   public func populate_array(array : [?Nat]) : async [Nat] {
-      return Array.map<?Nat,Nat>(array, func(n : ?Nat) : Nat {
+      return Array.map<?Nat, Nat>(array, func(n : ?Nat) : Nat {
           switch n {
               case null return 0;
               case (?n) return n;
@@ -118,8 +126,18 @@ actor {
       });
   };
 
+  // Challenge 14
+  public func sum_of_array(array : [Nat]) : async Nat {
+    return Array.foldLeft<Nat, Nat>(array, 0 : Nat, func(x : Nat, y : Nat) : Nat { x + y });
+  };
+
   // Challenge 15
   public func squared_array(array : [Nat]) : async [Nat] {
-    return Array.map<Nat,Nat>(array, func(x : Nat) : Nat { x * x });
+    return Array.map<Nat, Nat>(array, func(x : Nat) : Nat { x * x });
   }
+
+  // Challenge 16
+  public func increase_by_index(array : [Nat]) : async [Nat] {
+    return Array.mapEntries<Nat, Nat>(array, func(a : Nat, index : Nat) : Nat { a + index });
+  };
 }
