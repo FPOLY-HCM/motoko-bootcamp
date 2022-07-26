@@ -53,13 +53,24 @@ actor {
   };
 
   // Challenge 6
-  public func is_inside(t : Text, c : Text) : async Bool {
+  public func is_inside(t : Text, c : Char) : async Bool {
     return Text.contains(t, #text c);
   };
 
   // Challenge 7
   public func trim_whitespace(t : Text) : async Text {
     return Text.trim(t, #text(" "));
+  };
+
+  // Challenge 8
+  public func duplicated_character(t : Text) : async Text {
+    let characters : [Char] = Iter.toArray(t.chars());
+    for (i in Iter.range(0, t.size() - 2)) {
+      if (characters[i] == characters[i + 1]) {
+        return Text.fromChar(characters[i]);
+      }
+    };
+    return t;
   };
 
   // Challenge 9
