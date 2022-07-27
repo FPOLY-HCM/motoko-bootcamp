@@ -81,4 +81,19 @@ actor {
     let amount : Nat = Cycles.available();
     return Cycles.accept(amount);
   };
+
+  // Challenge 17 -> hard
+
+  // Challenge 18
+  stable var counter : Nat  = 0;
+  stable var versionNumber = 0;
+
+  public func increment_counter(n : Nat) : async Nat {
+    counter += n;
+    return counter;
+  }
+
+  system func postupgrade() {
+    versionNumber += 1;
+  }
 }
